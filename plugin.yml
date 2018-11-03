@@ -1,0 +1,11 @@
+name: NV
+main: chaca142\NV
+author: chaca142
+version: 0.0.1
+api:
+  - 4.0.0
+  - 3.3.1
+description: 暗視をつける
+commands:
+  nv:
+    description: "/nv 暗視効果をつける or 外す"
