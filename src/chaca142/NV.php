@@ -2,36 +2,38 @@
 
 namespace chaca142;
 
-use pocketmine\plugin\PluginBase;
-use pocketmine\event\Listener;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\entity\EffectInstance;
+use pocketmine\event\Listener;
 use pocketmine\entity\Effect;
+use pocketmine\entity\EffectInstance;
 use pocketmine\Player;
-use pocketmine\Server;
+use pocketmine\plugin\PluginBase;
 
-class NV extends PluginBase implements Listener{
+class NV extends PluginBase implements Listener {
 
-    public function onEnable(){
+    public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("§aNVを読み込みました");
+        $this->getLogger()->info("NVプラグインが読み込まれました");
+    }
+
+    public function onDisable() {
+        $this->getLogger()->info("NVプラグインを停止しました");
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool {
-
-        if($sender instanceof Player){
+        if($sender instanceof Player) {
             $player = $sender->getPlayer();
-            if($player->hasEffect(16)){
+            if($player->hasEffect(16)) {
                 $player->removeEffect(16);
-                $player->sendMessage("§aエフェクトを消しました");
+                $player->sendMessage("§a暗視を消しました");
             }else{
                 $player->addEffect(new EffectInstance(Effect::getEffect(16), 99999, 2, true));
-                $player->sendMessage("§aエフェクトを付けました");
+                $player->sendMessage("§a暗視を付けました");
             }
         }else{
             $this->getLogger()->info("§cコンソールからの実行はできません");
         }
-     return false;
+        return false;
     }
 }
